@@ -3,8 +3,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 env:
-  browser: false
-  commonjs: true
+  node: true
 extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 12

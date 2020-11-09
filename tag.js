@@ -4,24 +4,31 @@
 
 const core     = require("@actions/core");
 const requests = require("r2");
+const fs       = require("fs");
 
 const mime = "application/vnd.docker.distribution.manifest.v2+json";
 
 // Based on https://dille.name/blog/2018/09/20/how-to-tag-docker-images-without-pulling-them/
 async function main() {
     const registry   = core.getInput("registry");
-    const auth       = core.getInput("auth");
     const repository = core.getInput("repository");
-    const old_tag    = core.getInput("existing-tag");
-    const new_tag    = core.getInput("new-tag");
+    const oldTag     = core.getInput("existing_tag");
+    const newTag     = core.getInput("new_tag");
 
-    const check_url = `https://${registry}/v2/${repository}/manfiests/${old_tag}`;
+    const auth = getAuth(registry);
 
-    core.debug("Checking for manifest at " + check_url);
+    core.debug("Registry:   " + registry);
+    core.debug("Repositroy: " + repository);
+    core.debug("Old Tag:    " + oldTag);
+    core.debug("New Tag:    " + newTag);
+
+    const checkUrl = `https://${registry}/v2/${repository}/manifests/${oldTag}`;
+
+    core.debug("Checking for manifest at " + checkUrl);
 
     const manifest = await requests.get(
+        checkUrl,
         {
-            check_url,
             headers: {
                 "Accept": mime,
                 "Authorization": auth
@@ -29,24 +36,60 @@ async function main() {
         }
     );
 
-    core.debug(await manifest.response);
+    const manifestData = await manifest.json.catch( async e => {
+        core.setFailed(e.message);
+        core.setFailed(await manifest.text);
+    });
 
-    const tag_url = `https://${registry}/v2/${repository}/manfiests/${new_tag}`;
+    const tagUrl = `https://${registry}/v2/${repository}/manifests/${newTag}`;
 
-    core.debug("Checking for manifest at " + tag_url);
+    core.debug("Posting manifest to      " + tagUrl);
 
     const result = await requests.put(
-        tag_url,
+        tagUrl,
         {
-            json: manifest.json,
+            body: JSON.stringify(manifestData),
             headers: {
                 "Accept": mime,
                 "Authorization": auth
             },
         }
-    );
+    ).response;
 
-    core.debug(await result.response);
+    if (result.status === 201) {
+        core.debug("Successful");
+        return;
+    }
+
+    core.debug(result);
+}
+
+function getAuth(registry) {
+    const auth = core.getInput("auth");
+
+    if (auth) {
+        return auth;
+    }
+
+    const home      = process.env.HOME;
+    const rawConfig = fs.readFileSync(home + "/.docker/config.json");
+    const config    = JSON.parse(rawConfig);
+
+    if (!("auths" in config)) {
+        core.setFailed("No docker authorization info found");
+        return;
+    }
+
+    const auths = config.auths;
+
+    if (!(registry in auths)) {
+        core.setFailed("No docker authorisation for " + registry);
+        return;
+    }
+
+    core.setSecret(auths[registry].auth);
+
+    return "Basic " + auths[registry].auth;
 }
 
 main().catch(error => core.setFailed(error.message));

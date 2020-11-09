@@ -6,7 +6,7 @@ name: "Add Remote Tag"
 description: "Remotely add more tags to an existing docker image"
 
 branding:
-  image: tag
+  icon: tag
   color: orange
 
 inputs:
@@ -22,6 +22,9 @@ inputs:
   new-tag:
     description: "The tag to clone this to"
     required: true
+  auth:
+    descripton: "Authorization header to use for Docker API calls"
+    required: false
 
 runs:
   using: "node12"
