@@ -12,8 +12,8 @@ const mime = "application/vnd.docker.distribution.manifest.v2+json";
 async function main() {
     const registry   = core.getInput("registry");
     const repository = core.getInput("repository");
-    const oldTag     = core.getInput("existing_tag");
-    const newTag     = core.getInput("new_tag");
+    const oldTag     = core.getInput("existing-tag");
+    const newTag     = core.getInput("new-tag");
 
     const auth = getAuth(registry);
 
