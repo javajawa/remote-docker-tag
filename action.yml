@@ -4,8 +4,10 @@
 
 name: "Add Remote Tag"
 description: "Remotely add more tags to an existing docker image"
-image: tag
-color: orange
+
+branding:
+  image: tag
+  color: orange
 
 inputs:
   registry:
