@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2020 Benedict Harcourt
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
+name: "Add Remote Tag"
+description: "Remotely add more tags to an existing docker image"
+
+inputs:
+  registry:
+    description: "Docker registry to talk to"
+    required: true
+  repository:
+    description: "The name of the rpository to tag"
+    required: true
+  existing-tag:
+    description: "The tag to copy"
+    required: true
+  new-tag:
+    description: "The tag to clone this to"
+    required: true
+
+runs:
+  using: "node12"
+  main: "tag.js"
+
+# vim: nospell ts=2 expandtab
