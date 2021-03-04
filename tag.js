@@ -51,6 +51,7 @@ async function main() {
             body: JSON.stringify(manifestData),
             headers: {
                 "Accept": mime,
+                "Content-Type": mime,
                 "Authorization": auth
             },
         }
@@ -60,7 +61,7 @@ async function main() {
         core.debug("Successful");
         return;
     }
-
+    core.debug("Response Status: " + result.status + " " + result.statusText);
     core.debug(result);
 }
 
