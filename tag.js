@@ -14,9 +14,10 @@ async function main() {
     const repository = core.getInput("repository");
     const oldTag     = core.getInput("existing-tag");
     const newTag     = core.getInput("new-tag");
+    
 
     const auth = getAuth(registry);
-
+    
     core.debug("Registry:   " + registry);
     core.debug("Repositroy: " + repository);
     core.debug("Old Tag:    " + oldTag);
@@ -36,10 +37,13 @@ async function main() {
         }
     );
 
-    const manifestData = await manifest.json.catch( async e => {
+    /*const manifestData = await manifest.json.catch( async e => {
         core.setFailed(e.message);
         core.setFailed(await manifest.text);
-    });
+    });*/
+    const { readable, writable } = new TransformStream();
+    
+    manifest.body.pipeTo(writable);
 
     const tagUrl = `https://${registry}/v2/${repository}/manifests/${newTag}`;
 
@@ -48,7 +52,7 @@ async function main() {
     const result = await requests.put(
         tagUrl,
         {
-            body: JSON.stringify(manifestData),
+            body: readable, //JSON.stringify(manifestData),
             headers: {
                 "Accept": mime,
                 "Content-Type": mime,
