@@ -65,7 +65,7 @@ async function main() {
         core.debug("Successful");
         return;
     }
-
+    core.debug("Status: "+ result.status);
     core.debug(result);
 }
 
