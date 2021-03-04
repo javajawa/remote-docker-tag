@@ -36,7 +36,7 @@ async function main() {
         }
     );
 
-    const manifestData = await manifest.json.catch( async e => {
+    const manifestData = await manifest.blob.catch( async e => {
         core.setFailed(e.message);
         core.setFailed(await manifest.text);
     });
@@ -48,9 +48,10 @@ async function main() {
     const result = await requests.put(
         tagUrl,
         {
-            body: JSON.stringify(manifestData),
+            body: manifestData,
             headers: {
                 "Accept": mime,
+                "Content-Type": mime,
                 "Authorization": auth
             },
         }
@@ -61,6 +62,7 @@ async function main() {
         return;
     }
 
+    core.debug("Response Status: " + result.status + " " + result.statusText);
     core.debug(result);
 }
 
