@@ -51,6 +51,7 @@ async function main() {
             body: JSON.stringify(manifestData),
             headers: {
                 "Accept": mime,
+                "Content-Type": mime,
                 "Authorization": auth
             },
         }
