@@ -45,7 +45,7 @@ async function main() {
 
     core.debug("Posting manifest to      " + tagUrl);
 
-    const result = await requests.put(
+    const call = await requests.put(
         tagUrl,
         {
             body: JSON.stringify(manifestData),
@@ -55,7 +55,11 @@ async function main() {
                 "Authorization": auth
             },
         }
-    ).response;
+    );
+    const result = await call.response.catch(async e => {
+        core.debug("Failed to 'put' new tag");
+        core.debug(e.message);
+    });
 
     if (result.status === 201) {
         core.debug("Successful");
