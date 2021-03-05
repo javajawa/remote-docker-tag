@@ -41,11 +41,6 @@ async function main() {
         core.setFailed(e.message);
         core.setFailed(await manifest.text);
     });
-    /* Transform stream not available in Action (browser only)
-    Consider a Duplex Stream if Blob doesn't work
-    const { readable, writable } = new TransformStream();
-    
-    manifest.body.pipeTo(writable);*/
 
     const tagUrl = `https://${registry}/v2/${repository}/manifests/${newTag}`;
 
@@ -54,7 +49,7 @@ async function main() {
     const result = await requests.put(
         tagUrl,
         {
-            body: manifestData, //JSON.stringify(manifestData),
+            body: manifestData,
             headers: {
                 "Accept": mime,
                 "Content-Type": mime,
