@@ -1,7 +1,4 @@
 <!--
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 SPDX-FileCopyrightText: 2020 Benedict Harcourt
 
 SPDX-License-Identifier: BSD-2-Clause
@@ -22,7 +19,18 @@ Helper action to remotely duplicate the tag of a docker image.
 The authorisation value can either by passed by the `auth` input, or it will be
 automatically taken from `~/.docker/config.json`.
 
+When supplying the token you must include the scheme (such as `Basic`).
+```yaml
+- uses: javajawa/remote-docker-tag@v1
+  with:
+    auth: "Basic f835287amifgsfgs=="
+```
+
 ## Contributors ✨
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
