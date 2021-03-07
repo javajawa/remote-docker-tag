@@ -3,7 +3,7 @@ Upstream-Name: create-envfiles
 Upstream-Contact: Benedict Harcourt <ben.harcourt@harcourtprogramming.co.uk>
 Source: https://github.com/javajawa/remote-docker-tag
 
-Files: package.json package-lock.json
+Files: package.json package-lock.json .all-contributorsrc
 Copyright: n/a
 License: CC0-1.0
 
