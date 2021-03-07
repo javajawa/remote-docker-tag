@@ -1,0 +1,76 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: create-envfiles
+Upstream-Contact: Benedict Harcourt <ben.harcourt@harcourtprogramming.co.uk>
+Source: https://github.com/javajawa/remote-docker-tag
+
+Files: package.json package-lock.json
+Copyright: n/a
+License: CC0-1.0
+
+# https://github.com/actions/toolkit/blob/master/LICENSE.md
+Files: node_modules/@actions/*
+Copyright: 2019 Github
+License: MIT
+
+# https://github.com/octokit/core.js/blob/master/LICENSE
+Files: node_modules/@octokit/*
+Copyright: 2019 Octokit contributors
+License: MIT
+
+# https://github.com/DefinitelyTyped/DefinitelyTyped#license
+Files: node_modules/@types/*
+Copyright: .
+License: MIT
+
+Files: node_modules/once/* node_modules/wrappy/*
+Copyright: Isaac Z. Schlueter and Contributors
+License: ISC
+
+# https://github.com/gr2m/universal-user-agent/blob/master/LICENSE.md
+Files: node_modules/universal-user-agent/*
+Copyright: 2018, Gregor Martynus (https://github.com/gr2m)
+License: ISC
+
+# https://github.com/feross/typedarray-to-buffer/blob/master/LICENSE
+Files: node_modules/typedarray-to-buffer/*
+Copyright: Feross Aboukhadijeh
+License: MIT
+
+# https://github.com/koichik/node-tunnel/blob/master/LICENSE
+Files: node_modules/tunnel/*
+Copyright: 2012 Koichi Kobayashi
+License: MIT
+
+# https://github.com/mikeal/r2/blob/master/LICENSE
+Files: node_modules/r2/*
+Copyright: 2004
+License: Apache-2.0
+
+# https://github.com/node-fetch/node-fetch/blob/master/LICENSE.md
+Files: node_modules/node-fetch/*
+Copyright: 2016 - 2020 Node Fetch Team
+License: MIT
+
+# https://github.com/hughsk/is-typedarray/blob/master/LICENSE.md
+Files: node_modules/is-typedarray/*
+Copyright: Hugh Kennedy
+License: MIT
+
+# https://github.com/jonschlinkert/is-plain-object/blob/master/LICENSE
+Files: node_modules/is-plain-object/*
+Copyright: 2014-2017, Jon Schlinkert
+License: MIT
+
+Files: node_modules/deprecation/*
+Copyright: Gregor Martynus and contributors
+License: ISC
+
+# https://github.com/request/caseless/blob/master/LICENSE
+Files: node_modules/caseless/*
+Copyright: Ganesh Kumar and contributors
+License: Apache-2.0
+
+# https://github.com/request/caseless/blob/master/LICENSE
+Files: node_modules/before-after-hook/*
+Copyright: AnishaZ and contributors
+License: Apache-2.0
